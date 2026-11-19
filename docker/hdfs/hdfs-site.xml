@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<configuration>
+  <property><name>dfs.namenode.name.dir</name><value>file:///var/lib/hdfs/name</value></property>
+  <property><name>dfs.datanode.data.dir</name><value>file:///var/lib/hdfs/data</value></property>
+  <property><name>dfs.datanode.hostname</name><value>hdfs</value></property>
+  <property><name>dfs.client.use.datanode.hostname</name><value>true</value></property>
+  <property><name>dfs.replication</name><value>1</value></property>
+  <property><name>dfs.namenode.safemode.min.datanodes</name><value>1</value></property>
+</configuration>
