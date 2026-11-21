@@ -11,6 +11,7 @@ Aggregate = Row(*KEY_COLUMNS, "trip_count", "total_revenue", "avg_distance", "av
 
 
 def pair(row):
+    # Si associa ogni corsa alla chiave del gruppo e si inizializza il conteggio a uno.
     return (
         (row.vehicle_type, row.weekday, row.time_slot),
         (row.revenue_usd, row.distance_miles, row.speed_mph, 1),
@@ -27,6 +28,7 @@ def merge(left, right):
 
 
 def finish(item):
+    # Si calcolano le medie dopo aver sommato valori e conteggi di ciascun gruppo.
     key, (revenue, distance, speed, count) = item
     return Aggregate(*key, count, revenue, distance / count, speed / count)
 
@@ -38,6 +40,7 @@ def aggregate_rdd(frame):
 
 def aggregate_sql(frame):
     spark = frame.sparkSession
+    # Si usa un nome univoco per evitare collisioni tra esecuzioni nella stessa sessione.
     view = f"tlc_{uuid4().hex}"
     frame.createOrReplaceTempView(view)
     try:
@@ -54,6 +57,7 @@ def aggregate_sql(frame):
 
 
 def compare(rdd_rows, sql_rows):
+    # Si confrontano le righe per chiave, indipendentemente dall'ordine dei risultati.
     def index(rows):
         return {tuple(row[name] for name in KEY_COLUMNS): row for row in rows}
 
@@ -65,6 +69,7 @@ def compare(rdd_rows, sql_rows):
     if rdd.keys() != sql.keys():
         problems.append(f"Solo RDD: {sorted(rdd.keys() - sql.keys())}; solo SQL: {sorted(sql.keys() - rdd.keys())}")
 
+    # Si confrontano esattamente i conteggi e si ammettono piccoli scarti in virgola mobile.
     maxima = dict.fromkeys(ABS_TOLERANCES, 0.0)
     for key in sorted(rdd.keys() & sql.keys()):
         if rdd[key].trip_count != sql[key].trip_count:

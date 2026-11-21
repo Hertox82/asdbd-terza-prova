@@ -7,11 +7,13 @@ from pyspark.sql import functions as F
 
 from src.config import CLEANED, RESULTS, SLOTS, THRESHOLDS, TIMEZONE, save_json
 
+# Si associano a ogni categoria le colonne di origine per orari, distanza e tariffa.
 SOURCE_COLUMNS = {
     "yellow": ("tpep_pickup_datetime", "tpep_dropoff_datetime", "trip_distance", "fare_amount"),
     "green": ("lpep_pickup_datetime", "lpep_dropoff_datetime", "trip_distance", "fare_amount"),
     "hvfhv": ("pickup_datetime", "dropoff_datetime", "trip_miles", "base_passenger_fare"),
 }
+# Si usa questo ordine per associare i conteggi di riferimento ai campi del report.
 BASELINE_FIELDS = (
     "original_count", "removed_unique", "valid_count", "pickup_outside_month",
     "null_timestamp", "duration_nonpositive", "duration_over_limit",
@@ -34,6 +36,7 @@ def finite(column):
 
 def normalize(raw, category):
     pickup, dropoff, distance, revenue = SOURCE_COLUMNS[category]
+    # Si mantengono gli orari civili con timestamp_ntz e si conservano i campi diagnostici disponibili.
     frame = raw.select(
         *(name for name in ("total_amount", "trip_time") if name in raw.columns),
         F.col(pickup).cast("timestamp_ntz").alias("pickup_datetime"),
@@ -49,6 +52,7 @@ def normalize(raw, category):
         .withColumn("speed_mph", F.when(
             F.col("duration_seconds") > 0, F.col("distance_miles") * 3600 / F.col("duration_seconds")
         ))
+        # Si numerano i giorni da lunedì (1) a domenica (7) e si usano fasce di quattro ore.
         .withColumn("weekday", ((F.dayofweek("pickup_datetime") + 5) % 7 + 1).cast("int"))
         .withColumn("time_slot", F.get(F.array(*map(F.lit, SLOTS)),
                                       F.floor(F.hour("pickup_datetime") / 4).cast("int")))
@@ -62,6 +66,7 @@ def violations():
     distance = F.col("distance_miles")
     revenue = F.col("revenue_usd")
     speed = F.col("speed_mph")
+    # Si valuta la velocità solo se la durata è positiva e la distanza è finita e positiva.
     speed_computable = (duration > 0) & finite(distance) & (distance > 0)
     rules = {
         "pickup_outside_month": (pickup < F.lit(THRESHOLDS["pickup_start"]).cast("timestamp_ntz"))
@@ -75,15 +80,18 @@ def violations():
         "speed_over_limit": speed_computable & finite(speed) & (speed > THRESHOLDS["max_speed_mph"]),
         "revenue_invalid": ~finite(revenue) | (revenue < THRESHOLDS["min_revenue_usd"]),
     }
+    # Si contano i timestamp mancanti con una regola dedicata e si convertono in falso gli esiti nulli.
     return {name: F.coalesce(condition, F.lit(False)) for name, condition in rules.items()}
 
 
 def screen(raw, category):
     frame = normalize(raw, category)
     rules = violations()
+    # Si esclude ogni corsa una sola volta, anche quando viola più regole.
     removed = reduce(or_, rules.values())
     revenue = F.col("revenue_usd")
     cents = revenue * 100
+    # Si raccolgono queste misure a fini diagnostici, senza usarle come criteri di esclusione.
     diagnostics = {
         "valid_revenue_subcent": ~removed & (F.abs(cents - F.round(cents)) > 1e-6),
     }
@@ -141,6 +149,7 @@ def preprocess(spark, paths):
         f"velocità fino a {THRESHOLDS['max_speed_mph']} mph, "
         f"ricavo minimo {THRESHOLDS['min_revenue_usd']} USD."
     )
+    # Si rimuove il report precedente prima di sovrascrivere i Parquet delle singole categorie.
     report_path.unlink(missing_ok=True)
     for category, path in paths.items():
         label = "HVFHV" if category == "hvfhv" else category.title()
@@ -165,6 +174,7 @@ def preprocess(spark, paths):
 
             phase = "verifica di leggibilità su HDFS"
             _progress(f"{label} — {phase}")
+            # Si verifica la leggibilità delle colonne attese e la presenza di righe quando ne risultano di valide.
             if bool(spark.read.parquet(output).select(*NORMALIZED).take(1)) != (counts["valid_count"] > 0):
                 raise RuntimeError(f"Output Parquet incoerente per {category}")
             _progress(f"{label} — {phase} completata.")

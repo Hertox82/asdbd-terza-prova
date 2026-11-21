@@ -16,7 +16,7 @@ def benchmark(frames, run_id):
     timings = []
     summary = {}
     for index, category in enumerate(CATEGORIES):
-        # Materializzare una categoria alla volta sul disco locale.
+        # Si materializza una categoria alla volta sul disco locale con count().
         frame = frames[category].persist(StorageLevel.DISK_ONLY)
         try:
             count = frame.count()
@@ -29,12 +29,14 @@ def benchmark(frames, run_id):
                 "input_storage": "DISK_ONLY",
                 "input_rows": count,
             }
+            # Si alterna l'ordine iniziale tra categorie e si esegue un riscaldamento senza cronometro.
             algorithms = tuple(METHODS)
             if index % 2:
                 algorithms = algorithms[::-1]
             for algorithm in algorithms:
                 METHODS[algorithm](frame)
 
+            # Si alterna l'ordine nelle prove per ridurre l'effetto della posizione sui tempi.
             samples = {algorithm: [] for algorithm in algorithms}
             for run in range(1, RUNS + 1):
                 order = algorithms if run % 2 else algorithms[::-1]
@@ -63,6 +65,7 @@ def benchmark(frames, run_id):
             }
             for algorithm, values in samples.items()
         }
+        # Si divide la mediana RDD per quella SQL. Un valore maggiore di uno indica che SQL è più veloce.
         summary[category]["speedup_rdd_over_sql"] = (
             summary[category]["rdd"]["median"] / summary[category]["sql"]["median"]
         )
@@ -98,6 +101,7 @@ def save_benchmark(timings, summary):
     fig.savefig(RESULTS / "benchmark.png", dpi=150)
     plt.close(fig)
 
+    # Si sostituisce il CSV solo dopo aver terminato la scrittura.
     temporary = RESULTS / "benchmark.tmp"
     with temporary.open("w", newline="", encoding="utf-8") as stream:
         writer = csv.DictWriter(stream, fieldnames=list(timings[0]))

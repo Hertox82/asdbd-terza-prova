@@ -8,8 +8,10 @@ RESULTS = ROOT / "results"
 MONTH = "2025-07"
 HDFS_URI = "hdfs://hdfs:9000"
 CLEANED = f"{HDFS_URI}/data/nyc-tlc/{MONTH}/cleaned"
-TIMEZONE = "UTC"  # I timestamp locali sono trattati come orari civili senza fuso.
+# Si imposta il fuso della sessione Spark su UTC. Per le corse si conservano gli orari civili.
+TIMEZONE = "UTC"
 SLOTS = ("00-04", "04-08", "08-12", "12-16", "16-20", "20-24")
+# Si include l'inizio del mese e si esclude l'inizio del mese successivo.
 THRESHOLDS = {
     "version": "1",
     "pickup_start": "2025-07-01 00:00:00",
@@ -27,6 +29,7 @@ INPUTS = {
 
 
 def raw_paths(directory=RAW):
+    # Si controlla la presenza di tutti i Parquet prima di avviare l'elaborazione.
     paths = {category: directory / name for category, name in INPUTS.items()}
     missing = [path.name for path in paths.values() if not path.is_file()]
     if missing:
@@ -37,6 +40,7 @@ def raw_paths(directory=RAW):
 def spark_session(name):
     from pyspark.sql import SparkSession
 
+    # Si possono configurare master, memoria e partizioni di shuffle tramite variabili d'ambiente.
     return (
         SparkSession.builder.appName(name)
         .master(os.getenv("SPARK_MASTER", "local[4]"))
@@ -52,6 +56,7 @@ def spark_session(name):
 
 
 def save_json(path, content):
+    # Si scrive su un file temporaneo per evitare di esporre un JSON parziale.
     temporary = path.with_suffix(".tmp")
     temporary.write_text(
         json.dumps(content, ensure_ascii=False, indent=2, allow_nan=False) + "\n",

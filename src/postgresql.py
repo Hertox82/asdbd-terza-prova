@@ -17,6 +17,7 @@ AGGREGATE_SCHEMA = """
     avg_distance DOUBLE, avg_speed DOUBLE
 """
 
+# Si collegano aggregati e misure al rapporto di qualità tramite l'identificativo dell'esecuzione.
 DDL = (
     """
     CREATE TABLE IF NOT EXISTS tlc_quality (
@@ -67,6 +68,7 @@ def read_artifacts(directory=RESULTS):
     aggregates = json.loads((directory / "aggregates.json").read_text(encoding="utf-8"))
     with (directory / "benchmark.csv").open(newline="", encoding="utf-8") as stream:
         timings = list(csv.DictReader(stream))
+    # Si esportano solo risultati coerenti con la stessa esecuzione e con un benchmark completo.
     run_id = quality["run_id"]
     if aggregates["run_id"] != run_id or any(row["run_id"] != run_id for row in timings):
         raise ValueError("Report di run diversi: rieseguire il notebook 02 sul report di pulizia corrente")
@@ -83,6 +85,7 @@ def _verify_counts(rows, expected, source):
 
 def export_run(aggregate_frame, quality, aggregates, timings):
     run_id = quality["run_id"]
+    # Si ricavano i conteggi attesi dai report locali per verificare i dati scritti in PostgreSQL.
     expected = {
         (category, algorithm): (
             sum(row["vehicle_type"] == category for row in aggregates[algorithm]),
@@ -111,7 +114,7 @@ def export_run(aggregate_frame, quality, aggregates, timings):
         cursor.execute("SELECT current_schema()")
         (schema,) = cursor.fetchone()
         stage = sql.Identifier(schema, f"tlc_stage_{uuid4().hex}")
-        # La tabella deve essere visibile alle connessioni JDBC aperte da Spark.
+        # Si crea una tabella di staging visibile alle connessioni JDBC aperte da Spark.
         cursor.execute(sql.SQL("CREATE TABLE {} (LIKE tlc_aggregates INCLUDING ALL)").format(stage))
 
     try:
@@ -125,6 +128,7 @@ def export_run(aggregate_frame, quality, aggregates, timings):
         }
         table = stage.as_string()
         aggregate_frame.write.mode("append").jdbc(url, table, properties=properties)
+        # Si rileggono i dati via JDBC per verificare identificativo, gruppi e corse prima della pubblicazione.
         spark = aggregate_frame.sparkSession
         staged = (
             spark.read.jdbc(url, table, properties=properties)
@@ -140,6 +144,7 @@ def export_run(aggregate_frame, quality, aggregates, timings):
         )
         return _publish_run(run_id, quality, timing_rows, stage, expected)
     except BaseException as error:
+        # Si tenta di rimuovere la tabella di staging preservando l'errore originale.
         try:
             with connect() as connection, connection.cursor() as cursor:
                 cursor.execute(sql.SQL("DROP TABLE IF EXISTS {}").format(stage))
@@ -150,11 +155,12 @@ def export_run(aggregate_frame, quality, aggregates, timings):
 
 def _publish_run(run_id, quality, timing_rows, stage, expected):
     with connect() as connection, connection.cursor() as cursor:
-        # La riga del run serializza le esportazioni concorrenti dello stesso identificativo.
+        # Si acquisisce un lock sulla riga del rapporto per serializzare le esportazioni dello stesso run.
         cursor.execute("""
             INSERT INTO tlc_quality (run_id, report) VALUES (%s, %s)
             ON CONFLICT (run_id) DO UPDATE SET report = EXCLUDED.report
         """, (run_id, Jsonb(quality)))
+        # Si sostituiscono i risultati precedenti nella stessa transazione e si verifica quanto inserito.
         cursor.execute("DELETE FROM tlc_aggregates WHERE run_id = %s", (run_id,))
         cursor.execute("DELETE FROM tlc_benchmark WHERE run_id = %s", (run_id,))
         cursor.execute(sql.SQL("INSERT INTO tlc_aggregates SELECT * FROM {}").format(stage))
