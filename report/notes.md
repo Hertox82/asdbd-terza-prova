@@ -44,4 +44,8 @@ Ogni metodo ha eseguito un warm-up seguito da cinque misure per categoria. Il te
 
 L'ambiente verificato usa Python 3.11.11, Java 11.0.26+4, PySpark 3.5.5, JupyterLab 4.3.6, Hadoop 3.3.6 e PostgreSQL 16.8. In Compose sono passati i due test Spark sintetici e lo smoke check di lettura e scrittura HDFS e PostgreSQL.
 
-Il notebook 03 è stato eseguito due volte con lo stesso identificativo. Dopo entrambe le esportazioni, PostgreSQL conteneva 252 aggregati, 30 tempi e un report qualità per quel run. La query ha confermato per ciascuna categoria entrambi i metodi, 42 gruppi per metodo e i conteggi di corse del preprocessing. Spark ha letto 252 aggregati anche tramite JDBC.
+Nella verifica iniziale, l'export è stato eseguito due volte con lo stesso identificativo. Dopo entrambe le esportazioni, PostgreSQL conteneva 252 aggregati, 30 tempi e un report qualità per quel run. La query ha confermato per ciascuna categoria entrambi i metodi, 42 gruppi per metodo e i conteggi di corse del preprocessing. Spark ha letto 252 aggregati anche tramite JDBC.
+
+Nel flusso attuale il notebook 02 esegue aggregazioni, confronto, benchmark ed export PostgreSQL mantenendo aperta la stessa sessione Spark. Fuori dal tempo misurato, Spark scrive e rilegge via JDBC il DataFrame degli aggregati in una tabella di staging. Psycopg pubblica gli aggregati, il report qualità e le misure in una sola transazione.
+
+Per verificare il notebook unificato sono stati riusati gli aggregati, le misure e il report qualità del run storico. La prova ha mostrato le tre tabelle degli aggregati e il grafico, ha verificato la sessione Spark fino all'export e ha riletto 252 aggregati, 30 misure e un report qualità da uno schema PostgreSQL temporaneo. Le misurazioni riportate sopra provengono dal benchmark originale.

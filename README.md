@@ -23,17 +23,18 @@ docker compose ps
 
 Aprire `http://127.0.0.1:8888` e accedere usando il token di `.env`. Se si cambia la porta, usare `JUPYTER_PORT` nell'indirizzo. Jupyter è l'unico servizio pubblicato sull'host. HDFS e PostgreSQL sono raggiungibili nella rete Compose, rispettivamente su `hdfs://hdfs:9000` e `postgres:5432`.
 
-I Dockerfile fissano Python 3.11.11, Eclipse Temurin Java 11.0.26+4, PySpark 3.5.5, JupyterLab 4.3.6 e Hadoop 3.3.6. Spark usa il client Hadoop incluso in PySpark. PostgreSQL usa l'immagine ufficiale 16.8. Il driver JDBC PostgreSQL 42.7.5 è nel classpath Spark. L'export dei pochi aggregati usa Psycopg 3.2.6 per inserimenti e verifica nella stessa transazione.
+I Dockerfile fissano Python 3.11.11, Eclipse Temurin Java 11.0.26+4, PySpark 3.5.5, JupyterLab 4.3.6 e Hadoop 3.3.6. Spark usa il client Hadoop incluso in PySpark. PostgreSQL usa l'immagine ufficiale 16.8. Spark usa il driver JDBC PostgreSQL 42.7.5 già nel classpath per scrivere in append e rileggere il DataFrame degli aggregati in una tabella di staging. Psycopg 3.2.6 crea lo schema delle tabelle e pubblica il run, compresi report qualità e misure, in una transazione.
 
 ## Esecuzione dei notebook
 
 Aprire la cartella `notebooks/` in JupyterLab ed eseguire tutte le celle nell'ordine seguente. Eseguire un notebook alla volta per condividere le risorse Docker.
 
 1. `01_preprocessing.ipynb` controlla i tre originali, mostra metadati e scarti e scrive tre directory Parquet sotto `hdfs://hdfs:9000/data/nyc-tlc/2025-07/cleaned/`. Il report `results/quality.json` conserva i conteggi per regola, la differenza rispetto alla pre-analisi, le soglie e il `run_id`.
-2. `02_rdd_vs_sql.ipynb` legge gli output HDFS, verifica l'equivalenza RDD/SQL e salva `results/aggregates.json` se il confronto passa. Produce poi `benchmark.csv` con 30 tempi individuali, `benchmark_summary.json` con medie, mediane, deviazioni standard campionarie e rapporti tra mediane, e `benchmark.png` con il grafico.
-3. `03_postgresql.ipynb` controlla la coerenza del `run_id` dei report ed esporta in `tlc_aggregates`, `tlc_benchmark` e `tlc_quality`. Il notebook confronta gruppi e corse letti dal database con i report prima del commit. La riesecuzione con lo stesso `run_id` sostituisce solo i risultati di quella run in una transazione.
+2. `02_rdd_vs_sql.ipynb` legge gli output HDFS e confronta RDD e Spark SQL. Se il confronto passa, mostra gli aggregati per categoria, giorno e fascia oraria e salva `results/aggregates.json`. Produce `benchmark.csv` con 30 misure, `benchmark_summary.json` con le statistiche e `benchmark.png` con il confronto grafico delle mediane. Dopo il benchmark esporta gli aggregati di entrambi i metodi, le misure e il report del preprocessing in `tlc_aggregates`, `tlc_benchmark` e `tlc_quality`. Verifica i dati scritti prima del commit e chiude Spark dopo l'export.
 
-Per ripetere il benchmark sullo stesso input HDFS, riavviare il kernel del notebook 02 ed eseguirlo per intero a parità di configurazione. Il notebook rigenera il CSV, il riepilogo e il grafico. Copiare gli output che si vogliono conservare prima di rilanciare. Se serve esportare la nuova misurazione, rieseguire anche il notebook 03. Il notebook 01 genera un nuovo `run_id` ogni volta e sovrascrive i tre Parquet puliti.
+Per ripetere il benchmark sullo stesso input HDFS, riavviare il kernel del notebook 02 ed eseguirlo per intero a parità di configurazione. Il notebook rigenera gli output locali ed esporta i risultati aggiornati. Copiare gli output che si vogliono conservare prima di rilanciare. Il notebook 01 genera un nuovo `run_id` ogni volta e sovrascrive i tre Parquet puliti.
+
+Per riprovare solo l'export dopo un errore PostgreSQL, rieseguire la cella dell'export del notebook 02 nello stesso kernel, usando i file già prodotti. Il modulo verifica che i report appartengano allo stesso run. La riesecuzione sostituisce in una transazione le righe di quel `run_id`.
 
 Gli originali sono montati in sola lettura e non entrano nel contesto di build. `.env`, dati originali e output generati in `results/` sono ignorati da Git. Gli appunti per la relazione sono in [report/notes.md](report/notes.md).
 
@@ -73,12 +74,12 @@ finally:
         spark.stop()
 ```
 
-Il notebook 03 esegue inoltre la query di verifica sugli aggregati effettivi. Rieseguirlo con gli stessi report per controllare che gruppi e conteggi restino identici.
+La sezione PostgreSQL del notebook 02 verifica gruppi e corse con una rilettura JDBC della tabella di staging. La transazione di pubblicazione verifica nuovamente i conteggi sulla tabella definitiva e controlla il numero di misure prima del commit.
 
 ## Arresto, ripristino e problemi comuni
 
 - `docker compose down` arresta i servizi e conserva i volumi HDFS e PostgreSQL.
-- Per ricostruire l'intero ambiente da zero, `docker compose down -v` elimina i due volumi, inclusi i Parquet puliti e gli export PostgreSQL. Riavviare con `docker compose up -d --build` ed eseguire di nuovo 01 → 02 → 03. I file nelle directory host `data/raw/` e `results/` restano su disco.
+- Per ricostruire l'intero ambiente da zero, `docker compose down -v` elimina i due volumi, inclusi i Parquet puliti e gli export PostgreSQL. Riavviare con `docker compose up -d --build` ed eseguire di nuovo 01 → 02. I file nelle directory host `data/raw/` e `results/` restano su disco.
 - Se manca un input, il notebook 01 elenca tutti i file richiesti assenti. Verificare i nomi, incluso il prefisso `fhvhv_`.
 - Se Jupyter non si apre, controllare `docker compose ps`, la porta locale e lo stato dei servizi. Per errori HDFS o PostgreSQL, usare `docker compose logs hdfs postgres`.
 - Su Linux Jupyter lavora come utente con UID 1000. Assicurarsi che `notebooks/` e `results/` siano scrivibili da quell'utente.

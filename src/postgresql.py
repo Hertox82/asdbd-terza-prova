@@ -1,11 +1,21 @@
 import csv
 import json
 import os
+from urllib.parse import quote
+from uuid import uuid4
 
 import psycopg
+from psycopg import sql
 from psycopg.types.json import Jsonb
+from pyspark.sql import functions as F
 
 from src.config import RESULTS
+
+AGGREGATE_SCHEMA = """
+    run_id STRING, vehicle_type STRING, weekday SMALLINT, time_slot STRING,
+    algorithm STRING, trip_count BIGINT, total_revenue DOUBLE,
+    avg_distance DOUBLE, avg_speed DOUBLE
+"""
 
 DDL = (
     """
@@ -65,14 +75,23 @@ def read_artifacts(directory=RESULTS):
     return quality, aggregates, timings
 
 
-def export_run(quality, aggregates, timings):
+def _verify_counts(rows, expected, source):
+    actual = {(category, algorithm): (groups, trips) for category, algorithm, groups, trips in rows}
+    if actual != expected:
+        raise RuntimeError(f"Gruppi o conteggi PostgreSQL incoerenti in {source}: {actual}, attesi {expected}")
+
+
+def export_run(aggregate_frame, quality, aggregates, timings):
     run_id = quality["run_id"]
-    aggregate_rows = [
-        (run_id, row["vehicle_type"], row["weekday"], row["time_slot"], algorithm,
-         row["trip_count"], row["total_revenue"], row["avg_distance"], row["avg_speed"])
+    expected = {
+        (category, algorithm): (
+            sum(row["vehicle_type"] == category for row in aggregates[algorithm]),
+            item["counts"]["valid_count"],
+        )
+        for category, item in quality["categories"].items()
+        if item["counts"]["valid_count"] > 0
         for algorithm in ("rdd", "sql")
-        for row in aggregates[algorithm]
-    ]
+    }
     timing_rows = [
         (run_id, row["category"], row["algorithm"], int(row["run"]), float(row["seconds"]),
          int(row["order"]), Jsonb({
@@ -89,6 +108,48 @@ def export_run(quality, aggregates, timings):
     with connect() as connection, connection.cursor() as cursor:
         for statement in DDL:
             cursor.execute(statement)
+        cursor.execute("SELECT current_schema()")
+        (schema,) = cursor.fetchone()
+        stage = sql.Identifier(schema, f"tlc_stage_{uuid4().hex}")
+        # La tabella deve essere visibile alle connessioni JDBC aperte da Spark.
+        cursor.execute(sql.SQL("CREATE TABLE {} (LIKE tlc_aggregates INCLUDING ALL)").format(stage))
+
+    try:
+        database = quote(os.environ["POSTGRES_DB"], safe="")
+        url = f"jdbc:postgresql://postgres:5432/{database}"
+        properties = {
+            "driver": "org.postgresql.Driver",
+            "user": os.environ["POSTGRES_USER"],
+            "password": os.environ["POSTGRES_PASSWORD"],
+            "numPartitions": "1",
+        }
+        table = stage.as_string()
+        aggregate_frame.write.mode("append").jdbc(url, table, properties=properties)
+        spark = aggregate_frame.sparkSession
+        staged = (
+            spark.read.jdbc(url, table, properties=properties)
+            .groupBy("run_id", "vehicle_type", "algorithm")
+            .agg(F.count("*").alias("groups"), F.sum("trip_count").alias("trips"))
+            .collect()
+        )
+        if any(row.run_id != run_id for row in staged):
+            raise RuntimeError("Il DataFrame JDBC contiene aggregati di un altro run")
+        _verify_counts(
+            [(row.vehicle_type, row.algorithm, row.groups, row.trips) for row in staged],
+            expected, "staging JDBC",
+        )
+        return _publish_run(run_id, quality, timing_rows, stage, expected)
+    except BaseException as error:
+        try:
+            with connect() as connection, connection.cursor() as cursor:
+                cursor.execute(sql.SQL("DROP TABLE IF EXISTS {}").format(stage))
+        except psycopg.Error as cleanup_error:
+            error.add_note(f"Pulizia della tabella di staging {stage.as_string()} non riuscita: {cleanup_error}")
+        raise
+
+
+def _publish_run(run_id, quality, timing_rows, stage, expected):
+    with connect() as connection, connection.cursor() as cursor:
         # La riga del run serializza le esportazioni concorrenti dello stesso identificativo.
         cursor.execute("""
             INSERT INTO tlc_quality (run_id, report) VALUES (%s, %s)
@@ -96,12 +157,7 @@ def export_run(quality, aggregates, timings):
         """, (run_id, Jsonb(quality)))
         cursor.execute("DELETE FROM tlc_aggregates WHERE run_id = %s", (run_id,))
         cursor.execute("DELETE FROM tlc_benchmark WHERE run_id = %s", (run_id,))
-        cursor.executemany("""
-            INSERT INTO tlc_aggregates (
-                run_id, vehicle_type, weekday, time_slot, algorithm,
-                trip_count, total_revenue, avg_distance, avg_speed
-            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """, aggregate_rows)
+        cursor.execute(sql.SQL("INSERT INTO tlc_aggregates SELECT * FROM {}").format(stage))
         cursor.executemany("""
             INSERT INTO tlc_benchmark (run_id, category, algorithm, run, seconds, position, config)
             VALUES (%s, %s, %s, %s, %s, %s, %s)
@@ -113,20 +169,10 @@ def export_run(quality, aggregates, timings):
             GROUP BY vehicle_type, algorithm ORDER BY vehicle_type, algorithm
         """, (run_id,))
         stored = cursor.fetchall()
-        for category, algorithm, groups, trips in stored:
-            expected = quality["categories"][category]["counts"]["valid_count"]
-            if trips != expected or groups != sum(row["vehicle_type"] == category for row in aggregates[algorithm]):
-                raise RuntimeError(f"Conteggi PostgreSQL incoerenti per {category}, {algorithm}")
-        expected_pairs = {
-            (category, algorithm)
-            for category, item in quality["categories"].items()
-            if item["counts"]["valid_count"] > 0
-            for algorithm in ("rdd", "sql")
-        }
-        if {(category, algorithm) for category, algorithm, _, _ in stored} != expected_pairs:
-            raise RuntimeError("Categorie o algoritmi mancanti nella query di verifica")
+        _verify_counts(stored, expected, "tlc_aggregates")
 
         cursor.execute("SELECT COUNT(*) FROM tlc_benchmark WHERE run_id = %s", (run_id,))
         if cursor.fetchone()[0] != 30:
             raise RuntimeError("Numero di misure PostgreSQL diverso da 30")
+        cursor.execute(sql.SQL("DROP TABLE {}").format(stage))
     return stored

@@ -110,6 +110,11 @@ def screen(raw, category):
     return frame.where(~removed).select(*NORMALIZED), counts
 
 
+def _progress(message):
+    timestamp = datetime.now(timezone.utc).strftime("%H:%M:%S UTC")
+    print(f"[{timestamp}] {message}", flush=True)
+
+
 def preprocess(spark, paths):
     started = datetime.now(timezone.utc)
     report = {
@@ -121,24 +126,75 @@ def preprocess(spark, paths):
         "categories": {},
     }
     report_path = RESULTS / "quality.json"
+    _progress(
+        f"Avvio preprocessing {report['run_id']}. Spark {spark.version}, "
+        f"master {spark.sparkContext.master}, memoria driver "
+        f"{spark.sparkContext.getConf().get('spark.driver.memory', 'predefinita')}, "
+        f"partizioni shuffle {spark.conf.get('spark.sql.shuffle.partitions')}, "
+        f"fuso sessione {spark.conf.get('spark.sql.session.timeZone')}."
+    )
+    _progress(
+        f"Soglie v{THRESHOLDS['version']}. "
+        f"Pickup in [{THRESHOLDS['pickup_start']}, {THRESHOLDS['pickup_end']}), "
+        f"durata fino a {THRESHOLDS['max_duration_seconds']} s, "
+        f"distanza fino a {THRESHOLDS['max_distance_miles']} mi, "
+        f"velocità fino a {THRESHOLDS['max_speed_mph']} mph, "
+        f"ricavo minimo {THRESHOLDS['min_revenue_usd']} USD."
+    )
     report_path.unlink(missing_ok=True)
     for category, path in paths.items():
-        raw = spark.read.parquet(path.as_uri())
-        clean, counts = screen(raw, category)
+        label = "HVFHV" if category == "hvfhv" else category.title()
         output = f"{CLEANED}/{category}"
-        clean.write.mode("overwrite").parquet(output)
-        if bool(spark.read.parquet(output).select(*NORMALIZED).take(1)) != (counts["valid_count"] > 0):
-            raise RuntimeError(f"Output Parquet incoerente per {category}")
-        baseline = dict(zip(BASELINE_FIELDS, BASELINE[category]))
-        report["categories"][category] = {
-            "source": path.name,
-            "size_bytes": path.stat().st_size,
-            "schema": {field.name: field.dataType.simpleString() for field in raw.schema},
-            "cleaned": output,
-            "counts": counts,
-            "removed_pct": 100 * counts["removed_unique"] / max(counts["original_count"], 1),
-            "baseline": baseline,
-            "delta_from_baseline": {name: counts[name] - value for name, value in baseline.items()},
-        }
+        phase = "lettura del Parquet originale"
+        try:
+            _progress(f"{label} — inizio {phase}: {path.name}")
+            raw = spark.read.parquet(path.as_uri())
+
+            phase = "calcolo delle statistiche e controlli di qualità"
+            _progress(f"{label} — inizio {phase}")
+            clean, counts = screen(raw, category)
+            _progress(
+                f"{label} — {counts['original_count']} record originali, "
+                f"{counts['removed_unique']} esclusi e {counts['valid_count']} validi."
+            )
+
+            phase = "scrittura su HDFS"
+            _progress(f"{label} — inizio {phase}: {output}")
+            clean.write.mode("overwrite").parquet(output)
+            _progress(f"{label} — {phase} completata.")
+
+            phase = "verifica di leggibilità su HDFS"
+            _progress(f"{label} — {phase}")
+            if bool(spark.read.parquet(output).select(*NORMALIZED).take(1)) != (counts["valid_count"] > 0):
+                raise RuntimeError(f"Output Parquet incoerente per {category}")
+            _progress(f"{label} — {phase} completata.")
+
+            phase = "raccolta dei metadati per il report"
+            baseline = dict(zip(BASELINE_FIELDS, BASELINE[category]))
+            report["categories"][category] = {
+                "source": path.name,
+                "size_bytes": path.stat().st_size,
+                "schema": {field.name: field.dataType.simpleString() for field in raw.schema},
+                "cleaned": output,
+                "counts": counts,
+                "removed_pct": 100 * counts["removed_unique"] / max(counts["original_count"], 1),
+                "baseline": baseline,
+                "delta_from_baseline": {name: counts[name] - value for name, value in baseline.items()},
+            }
+        except Exception as error:
+            error.add_note(f"Categoria {label}, fase {phase}.")
+            _progress(f"{label} — errore durante {phase}.")
+            raise
+
+    _progress(f"Salvataggio del report: {report_path}")
     save_json(report_path, report)
+    categories = report["categories"]
+    original, removed, valid = (
+        sum(item["counts"][field] for item in categories.values())
+        for field in ("original_count", "removed_unique", "valid_count")
+    )
+    _progress(
+        f"Preprocessing completato per {len(categories)} categorie. "
+        f"{original} record originali, {removed} esclusi e {valid} validi."
+    )
     return report
