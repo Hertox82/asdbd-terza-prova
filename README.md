@@ -1,87 +1,53 @@
 # NYC TLC Trip Record Data — luglio 2025
 
-Il progetto confronta RDD/MapReduce e Spark SQL sulle corse Yellow, Green e HVFHV. Per categoria, giorno della settimana e fascia oraria, calcola ricavo base totale, distanza media, velocità individuale media e numero di corse.
+## Avvio rapido
 
-## Requisiti e avvio
+Servono Git, Python 3.11 o successivo, Docker con container Linux e Compose v2, una connessione a Internet e circa 7,6 GiB di RAM per Docker. Su disco occorrono circa 530 MiB per i dataset, oltre allo spazio per le immagini Docker, i dati elaborati e la cache di Spark.
 
-Servono Docker con Compose v2 o successivo e circa 7,6 GiB disponibili a Docker. Lasciare spazio per le immagini, i Parquet puliti persistenti e la cache Spark temporanea su disco. Spark parte con `local[4]`, heap driver di `3g` e 12 partizioni di shuffle. I tre valori si possono modificare in `.env`.
+1. Clonare il repository, scaricare i dataset e copiare il modello di configurazione.
 
-Copiare i tre Parquet originali in `data/raw/`. I nomi devono coincidere con quelli di luglio 2025. [NYC TLC](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
+   ```sh
+   git clone https://github.com/Hertox82/asdbd-terza-prova.git
+   cd asdbd-terza-prova
+   python scripts/download_datasets.py
+   cp .env.example .env
+   ```
 
-| Categoria | File |
-|---|---|
-| Yellow | `yellow_tripdata_2025-07.parquet` |
-| Green | `green_tripdata_2025-07.parquet` |
-| HVFHV | `fhvhv_tripdata_2025-07.parquet` |
+   Se Python è disponibile come `python3`, usare quel comando al posto di `python`. Lo script salva i dataset in `data/raw/` e verifica dimensioni e SHA-256. Per il download manuale, consultare il [README dei dataset](data/raw/README.md).
 
-Copiare `.env.example` in `.env` e valorizzare `JUPYTER_TOKEN` e `POSTGRES_PASSWORD`. Dalla radice eseguire questi comandi.
+2. Aprire `.env` in un editor e impostare `JUPYTER_TOKEN` e `POSTGRES_PASSWORD` con valori a scelta. Su Linux, verificare che `notebooks/` e `results/` siano scrivibili dall’utente del container (UID 1000).
 
-```sh
-docker compose up -d --build
-docker compose ps
-```
+3. Avviare i servizi dalla radice del repository e controllarne lo stato.
 
-Aprire `http://127.0.0.1:8888` e accedere usando il token di `.env`. Se si cambia la porta, usare `JUPYTER_PORT` nell'indirizzo. Jupyter è l'unico servizio pubblicato sull'host. HDFS e PostgreSQL sono raggiungibili nella rete Compose, rispettivamente su `hdfs://hdfs:9000` e `postgres:5432`.
+   ```sh
+   docker compose up -d --build
+   docker compose ps
+   ```
 
-I Dockerfile fissano Python 3.11.11, Eclipse Temurin Java 11.0.26+4, PySpark 3.5.5, JupyterLab 4.3.6 e Hadoop 3.3.6. Spark usa il client Hadoop incluso in PySpark. PostgreSQL usa l'immagine ufficiale 16.8. Spark usa il driver JDBC PostgreSQL 42.7.5 già nel classpath per scrivere in append e rileggere il DataFrame degli aggregati in una tabella di staging. Psycopg 3.2.6 crea lo schema delle tabelle e pubblica il run, compresi report qualità e misure, in una transazione.
+4. Aprire nel browser `http://127.0.0.1:8888` e accedere con il valore di `JUPYTER_TOKEN` impostato in `.env`. Se `JUPYTER_PORT` è diversa da `8888`, usare la porta configurata nell’indirizzo.
 
 ## Esecuzione dei notebook
 
-Aprire la cartella `notebooks/` in JupyterLab ed eseguire tutte le celle nell'ordine seguente. Eseguire un notebook alla volta per condividere le risorse Docker.
+In JupyterLab aprire la cartella `notebooks/`. Eseguire tutte le celle di ciascun notebook, completando il primo prima di avviare il secondo.
 
-1. `01_preprocessing.ipynb` controlla i tre originali, mostra metadati e scarti e scrive tre directory Parquet sotto `hdfs://hdfs:9000/data/nyc-tlc/2025-07/cleaned/`. Il report `results/quality.json` conserva i conteggi per regola, la differenza rispetto alla pre-analisi, le soglie e il `run_id`.
-2. `02_rdd_vs_sql.ipynb` legge gli output HDFS e confronta RDD e Spark SQL. Se il confronto passa, mostra gli aggregati per categoria, giorno e fascia oraria e salva `results/aggregates.json`. Produce `benchmark.csv` con 30 misure, `benchmark_summary.json` con le statistiche e `benchmark.png` con il confronto grafico delle mediane. Dopo il benchmark esporta gli aggregati di entrambi i metodi, le misure e il report del preprocessing in `tlc_aggregates`, `tlc_benchmark` e `tlc_quality`. Verifica i dati scritti prima del commit e chiude Spark dopo l'export.
+1. **`01_preprocessing.ipynb`** pulisce e normalizza i dataset Yellow, Green e HVFHV ed esporta i Parquet puliti su HDFS in configurazione pseudo-distribuita.
+2. **`02_rdd_vs_sql.ipynb`** legge i Parquet da HDFS, calcola gli aggregati con RDD e Spark SQL, verifica l’equivalenza dei risultati, esegue il benchmark, genera i grafici ed esporta aggregati, misure e report di qualità in PostgreSQL.
 
-Per ripetere il benchmark sullo stesso input HDFS, riavviare il kernel del notebook 02 ed eseguirlo per intero a parità di configurazione. Il notebook rigenera gli output locali ed esporta i risultati aggiornati. Copiare gli output che si vogliono conservare prima di rilanciare. Il notebook 01 genera un nuovo `run_id` ogni volta e sovrascrive i tre Parquet puliti.
+Spark gira in modalità `local[4]` nel container Jupyter. I notebook aggiornano i file in `results/`.
 
-Per riprovare solo l'export dopo un errore PostgreSQL, rieseguire la cella dell'export del notebook 02 nello stesso kernel, usando i file già prodotti. Il modulo verifica che i report appartengano allo stesso run. La riesecuzione sostituisce in una transazione le righe di quel `run_id`.
+## Risultati già disponibili
 
-Gli originali sono montati in sola lettura e non entrano nel contesto di build. `.env`, dati originali e output generati in `results/` sono ignorati da Git. Gli appunti per la relazione sono in [report/notes.md](report/notes.md).
+I risultati della consegna si possono consultare direttamente in [`results/`](results/).
 
-## Verifiche minime
+- [Controlli di qualità e scarti](results/quality.json)
+- [Aggregati RDD e Spark SQL](results/aggregates.json)
+- [Misure del benchmark](results/benchmark.csv), [statistiche](results/benchmark_summary.json) e [grafico delle mediane](results/benchmark.png)
+- Heatmap di [ricavo base totale](results/heatmap_revenue.png), [distanza media](results/heatmap_distance.png) e [velocità individuale media](results/heatmap_speed.png)
 
-Eseguire i due test di logica nel servizio Jupyter.
+## Arresto dei servizi
+
+Dalla radice del repository, arrestare Docker Compose mantenendo i volumi di HDFS e PostgreSQL.
 
 ```sh
-docker compose exec jupyter python -m unittest discover -s tests -v
+docker compose down
 ```
-
-Per lo smoke check, aprire una console Python nuova in JupyterLab ed eseguire questa cella. Spark scrive e rilegge un Parquet temporaneo in HDFS e trasferisce il risultato in una tabella PostgreSQL temporanea. La tabella scompare alla chiusura della connessione e il file di prova viene rimosso.
-
-```python
-from uuid import uuid4
-
-from src.config import HDFS_URI, spark_session
-from src.postgresql import connect
-
-spark = spark_session("TLC - smoke")
-uri = f"{HDFS_URI}/data/smoke-{uuid4().hex}"
-path = spark._jvm.org.apache.hadoop.fs.Path(uri)
-fs = path.getFileSystem(spark.sparkContext._jsc.hadoopConfiguration())
-try:
-    spark.range(1).write.parquet(uri)
-    (value,) = spark.read.parquet(uri).select("id").first()
-    with connect() as conn, conn.cursor() as cur:
-        cur.execute("CREATE TEMP TABLE smoke_tlc (id bigint)")
-        cur.execute("INSERT INTO smoke_tlc VALUES (%s)", (value,))
-        cur.execute("SELECT id FROM smoke_tlc")
-        assert cur.fetchone() == (0,)
-    print("PASS: Spark, HDFS e PostgreSQL")
-finally:
-    try:
-        fs.delete(path, True)
-    finally:
-        spark.stop()
-```
-
-La sezione PostgreSQL del notebook 02 verifica gruppi e corse con una rilettura JDBC della tabella di staging. La transazione di pubblicazione verifica nuovamente i conteggi sulla tabella definitiva e controlla il numero di misure prima del commit.
-
-## Arresto, ripristino e problemi comuni
-
-- `docker compose down` arresta i servizi e conserva i volumi HDFS e PostgreSQL.
-- Per ricostruire l'intero ambiente da zero, `docker compose down -v` elimina i due volumi, inclusi i Parquet puliti e gli export PostgreSQL. Riavviare con `docker compose up -d --build` ed eseguire di nuovo 01 → 02. I file nelle directory host `data/raw/` e `results/` restano su disco.
-- Se manca un input, il notebook 01 elenca tutti i file richiesti assenti. Verificare i nomi, incluso il prefisso `fhvhv_`.
-- Se Jupyter non si apre, controllare `docker compose ps`, la porta locale e lo stato dei servizi. Per errori HDFS o PostgreSQL, usare `docker compose logs hdfs postgres`.
-- Su Linux Jupyter lavora come utente con UID 1000. Assicurarsi che `notebooks/` e `results/` siano scrivibili da quell'utente.
-- In caso di pressione sulla RAM, arrestare gli altri kernel e ridurre parallelismo o heap in `.env`, poi ricreare il servizio Jupyter con `docker compose up -d jupyter`. Verificare anche lo spazio disco prima del benchmark HVFHV.
-- PostgreSQL usa le credenziali di `.env` per inizializzare un volume nuovo. Se la password cambia dopo l'inizializzazione, occorre aggiornare anche il ruolo PostgreSQL o ricreare consapevolmente il volume.
