@@ -1,0 +1,6 @@
+**
+!docker/
+!docker/jupyter/
+!docker/jupyter/Dockerfile
+!docker/hdfs/
+!docker/hdfs/**

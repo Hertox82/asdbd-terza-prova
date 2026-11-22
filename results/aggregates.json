@@ -1,0 +1,2294 @@
+{
+  "run_id": "20261120T222719Z-80fd1769",
+  "comparison": {
+    "verdict": "PASS",
+    "groups_rdd": 126,
+    "groups_sql": 126,
+    "max_abs_difference": {
+      "total_revenue": 0.0,
+      "avg_distance": 0.0,
+      "avg_speed": 0.0
+    },
+    "problems": []
+  },
+  "tolerances": {
+    "relative": 1e-10,
+    "absolute": {
+      "total_revenue": 1e-06,
+      "avg_distance": 1e-09,
+      "avg_speed": 1e-09
+    }
+  },
+  "rdd": [
+    {
+      "vehicle_type": "green",
+      "weekday": 1,
+      "time_slot": "00-04",
+      "trip_count": 162,
+      "total_revenue": 3808.1400000000012,
+      "avg_distance": 4.181172839506172,
+      "avg_speed": 17.312125974745012
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 1,
+      "time_slot": "04-08",
+      "trip_count": 520,
+      "total_revenue": 8239.999999999973,
+      "avg_distance": 4.1454615384615385,
+      "avg_speed": 14.748977189092434
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 1,
+      "time_slot": "08-12",
+      "trip_count": 1514,
+      "total_revenue": 25657.780000000224,
+      "avg_distance": 3.3897027741083274,
+      "avg_speed": 11.06980677650774
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 1,
+      "time_slot": "12-16",
+      "trip_count": 1512,
+      "total_revenue": 24393.15000000019,
+      "avg_distance": 3.269411375661372,
+      "avg_speed": 10.759832782532396
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 1,
+      "time_slot": "16-20",
+      "trip_count": 1842,
+      "total_revenue": 27938.050000000116,
+      "avg_distance": 2.747122692725297,
+      "avg_speed": 10.987495486666312
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 1,
+      "time_slot": "20-24",
+      "trip_count": 778,
+      "total_revenue": 16497.540000000005,
+      "avg_distance": 3.625231362467867,
+      "avg_speed": 14.077862089719154
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 2,
+      "time_slot": "00-04",
+      "trip_count": 159,
+      "total_revenue": 3099.7800000000007,
+      "avg_distance": 4.129433962264148,
+      "avg_speed": 17.289447664811807
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 2,
+      "time_slot": "04-08",
+      "trip_count": 600,
+      "total_revenue": 9895.54999999996,
+      "avg_distance": 4.38928333333333,
+      "avg_speed": 14.108736674799188
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 2,
+      "time_slot": "08-12",
+      "trip_count": 2051,
+      "total_revenue": 36563.25000000024,
+      "avg_distance": 3.4468600682593795,
+      "avg_speed": 10.944695094052955
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 2,
+      "time_slot": "12-16",
+      "trip_count": 1913,
+      "total_revenue": 31673.67000000025,
+      "avg_distance": 3.3132253005750125,
+      "avg_speed": 10.438353227205651
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 2,
+      "time_slot": "16-20",
+      "trip_count": 2243,
+      "total_revenue": 34644.18000000006,
+      "avg_distance": 2.660151582701739,
+      "avg_speed": 10.776558436972985
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 2,
+      "time_slot": "20-24",
+      "trip_count": 1065,
+      "total_revenue": 22934.910000000014,
+      "avg_distance": 3.683183098591546,
+      "avg_speed": 14.050961670710796
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 3,
+      "time_slot": "00-04",
+      "trip_count": 180,
+      "total_revenue": 3262.7000000000003,
+      "avg_distance": 3.7836666666666665,
+      "avg_speed": 15.799769804170177
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 3,
+      "time_slot": "04-08",
+      "trip_count": 540,
+      "total_revenue": 8988.839999999978,
+      "avg_distance": 4.354833333333329,
+      "avg_speed": 14.595673279392043
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 3,
+      "time_slot": "08-12",
+      "trip_count": 1893,
+      "total_revenue": 30809.930000000215,
+      "avg_distance": 3.083417855256211,
+      "avg_speed": 10.871183120802247
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 3,
+      "time_slot": "12-16",
+      "trip_count": 1922,
+      "total_revenue": 32026.53000000024,
+      "avg_distance": 3.273387096774194,
+      "avg_speed": 10.401014193400865
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 3,
+      "time_slot": "16-20",
+      "trip_count": 2339,
+      "total_revenue": 37536.430000000095,
+      "avg_distance": 2.860709705002137,
+      "avg_speed": 10.939316657666636
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 3,
+      "time_slot": "20-24",
+      "trip_count": 1121,
+      "total_revenue": 25191.43000000003,
+      "avg_distance": 3.732167707404101,
+      "avg_speed": 13.600508804324875
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 4,
+      "time_slot": "00-04",
+      "trip_count": 211,
+      "total_revenue": 3844.8200000000006,
+      "avg_distance": 3.7981990521327025,
+      "avg_speed": 15.711508076125515
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 4,
+      "time_slot": "04-08",
+      "trip_count": 518,
+      "total_revenue": 7532.299999999972,
+      "avg_distance": 4.33353281853282,
+      "avg_speed": 14.662460036995197
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 4,
+      "time_slot": "08-12",
+      "trip_count": 1871,
+      "total_revenue": 30257.990000000296,
+      "avg_distance": 3.1352592196686286,
+      "avg_speed": 10.692526847252875
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 4,
+      "time_slot": "12-16",
+      "trip_count": 2121,
+      "total_revenue": 36648.18000000024,
+      "avg_distance": 3.311277699198493,
+      "avg_speed": 10.192977872271094
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 4,
+      "time_slot": "16-20",
+      "trip_count": 2359,
+      "total_revenue": 39889.96000000001,
+      "avg_distance": 2.8927002967359114,
+      "avg_speed": 10.221413902806368
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 4,
+      "time_slot": "20-24",
+      "trip_count": 1043,
+      "total_revenue": 20719.16000000003,
+      "avg_distance": 3.4210354745925264,
+      "avg_speed": 13.075521137703307
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 5,
+      "time_slot": "00-04",
+      "trip_count": 199,
+      "total_revenue": 4112.48,
+      "avg_distance": 3.8944221105527634,
+      "avg_speed": 16.06087263549293
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 5,
+      "time_slot": "04-08",
+      "trip_count": 346,
+      "total_revenue": 5646.589999999982,
+      "avg_distance": 4.4924566473988445,
+      "avg_speed": 15.924341509943666
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 5,
+      "time_slot": "08-12",
+      "trip_count": 1068,
+      "total_revenue": 17025.920000000016,
+      "avg_distance": 3.4582303370786462,
+      "avg_speed": 12.248047549366403
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 5,
+      "time_slot": "12-16",
+      "trip_count": 1273,
+      "total_revenue": 21232.860000000157,
+      "avg_distance": 3.3140926944226226,
+      "avg_speed": 11.573208026240877
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 5,
+      "time_slot": "16-20",
+      "trip_count": 1609,
+      "total_revenue": 26923.950000000073,
+      "avg_distance": 3.00177750155376,
+      "avg_speed": 10.903401262869824
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 5,
+      "time_slot": "20-24",
+      "trip_count": 998,
+      "total_revenue": 24314.41000000005,
+      "avg_distance": 3.955761523046097,
+      "avg_speed": 13.134733556550726
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 6,
+      "time_slot": "00-04",
+      "trip_count": 478,
+      "total_revenue": 13458.959999999992,
+      "avg_distance": 4.292384937238497,
+      "avg_speed": 15.659495646299483
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 6,
+      "time_slot": "04-08",
+      "trip_count": 243,
+      "total_revenue": 7074.649999999992,
+      "avg_distance": 4.739876543209877,
+      "avg_speed": 18.840782860856315
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 6,
+      "time_slot": "08-12",
+      "trip_count": 707,
+      "total_revenue": 11844.289999999979,
+      "avg_distance": 3.982503536067892,
+      "avg_speed": 14.04931513398897
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 6,
+      "time_slot": "12-16",
+      "trip_count": 1168,
+      "total_revenue": 20959.360000000095,
+      "avg_distance": 3.5339554794520525,
+      "avg_speed": 11.651719475290568
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 6,
+      "time_slot": "16-20",
+      "trip_count": 1410,
+      "total_revenue": 26286.30000000003,
+      "avg_distance": 3.4696808510638304,
+      "avg_speed": 11.641532507416056
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 6,
+      "time_slot": "20-24",
+      "trip_count": 1015,
+      "total_revenue": 22765.700000000048,
+      "avg_distance": 3.8835073891625638,
+      "avg_speed": 13.176834591829934
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 7,
+      "time_slot": "00-04",
+      "trip_count": 461,
+      "total_revenue": 12471.959999999994,
+      "avg_distance": 4.22110629067245,
+      "avg_speed": 15.044679415057354
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 7,
+      "time_slot": "04-08",
+      "trip_count": 235,
+      "total_revenue": 6803.269999999999,
+      "avg_distance": 5.189702127659572,
+      "avg_speed": 18.9115998391949
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 7,
+      "time_slot": "08-12",
+      "trip_count": 738,
+      "total_revenue": 12356.68999999995,
+      "avg_distance": 4.2665040650406505,
+      "avg_speed": 14.767400970257219
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 7,
+      "time_slot": "12-16",
+      "trip_count": 1358,
+      "total_revenue": 23170.38000000011,
+      "avg_distance": 3.35978645066274,
+      "avg_speed": 12.514268491051137
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 7,
+      "time_slot": "16-20",
+      "trip_count": 1512,
+      "total_revenue": 26988.170000000067,
+      "avg_distance": 3.2690079365079416,
+      "avg_speed": 12.49219764865018
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 7,
+      "time_slot": "20-24",
+      "trip_count": 902,
+      "total_revenue": 18811.65000000001,
+      "avg_distance": 3.645088691796006,
+      "avg_speed": 14.005376287626323
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 1,
+      "time_slot": "00-04",
+      "trip_count": 177170,
+      "total_revenue": 4381018.560000001,
+      "avg_distance": 6.149143319975165,
+      "avg_speed": 18.471748026860777
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 1,
+      "time_slot": "04-08",
+      "trip_count": 265287,
+      "total_revenue": 7731818.139999861,
+      "avg_distance": 6.332537730834923,
+      "avg_speed": 17.586655159000884
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 1,
+      "time_slot": "08-12",
+      "trip_count": 481744,
+      "total_revenue": 12510085.18999988,
+      "avg_distance": 4.8476223948818955,
+      "avg_speed": 12.957176853331164
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 1,
+      "time_slot": "12-16",
+      "trip_count": 433067,
+      "total_revenue": 12019293.379999882,
+      "avg_distance": 5.012627974424308,
+      "avg_speed": 12.30431529835667
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 1,
+      "time_slot": "16-20",
+      "trip_count": 515110,
+      "total_revenue": 13145573.709999934,
+      "avg_distance": 4.42279379355864,
+      "avg_speed": 12.057099917020974
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 1,
+      "time_slot": "20-24",
+      "trip_count": 418459,
+      "total_revenue": 11149472.500000048,
+      "avg_distance": 5.377710731517298,
+      "avg_speed": 15.173804471025376
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 2,
+      "time_slot": "00-04",
+      "trip_count": 175059,
+      "total_revenue": 4469451.789999999,
+      "avg_distance": 6.012527467882265,
+      "avg_speed": 18.175861145429305
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 2,
+      "time_slot": "04-08",
+      "trip_count": 324159,
+      "total_revenue": 8947639.129999945,
+      "avg_distance": 5.940743126058513,
+      "avg_speed": 16.858956074072
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 2,
+      "time_slot": "08-12",
+      "trip_count": 632676,
+      "total_revenue": 16806169.000000197,
+      "avg_distance": 4.568640918890492,
+      "avg_speed": 12.037180868565276
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 2,
+      "time_slot": "12-16",
+      "trip_count": 572833,
+      "total_revenue": 15951264.839999925,
+      "avg_distance": 4.746582894141933,
+      "avg_speed": 11.61713165096846
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 2,
+      "time_slot": "16-20",
+      "trip_count": 697333,
+      "total_revenue": 17893502.840000104,
+      "avg_distance": 4.293943312592374,
+      "avg_speed": 11.431458999884594
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 2,
+      "time_slot": "20-24",
+      "trip_count": 589900,
+      "total_revenue": 16673672.859999714,
+      "avg_distance": 5.437697402949656,
+      "avg_speed": 14.901032266935104
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 3,
+      "time_slot": "00-04",
+      "trip_count": 196162,
+      "total_revenue": 4856510.910000004,
+      "avg_distance": 5.778338602787498,
+      "avg_speed": 17.708583895188223
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 3,
+      "time_slot": "04-08",
+      "trip_count": 336630,
+      "total_revenue": 9235869.209999908,
+      "avg_distance": 5.865380393904335,
+      "avg_speed": 16.6749495846304
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 3,
+      "time_slot": "08-12",
+      "trip_count": 648003,
+      "total_revenue": 17238179.92000016,
+      "avg_distance": 4.546428758817407,
+      "avg_speed": 12.089573178363965
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 3,
+      "time_slot": "12-16",
+      "trip_count": 582388,
+      "total_revenue": 16800383.920000143,
+      "avg_distance": 4.848925539331227,
+      "avg_speed": 11.536965963848738
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 3,
+      "time_slot": "16-20",
+      "trip_count": 696997,
+      "total_revenue": 18665472.420000277,
+      "avg_distance": 4.40481400780779,
+      "avg_speed": 11.259534809041362
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 3,
+      "time_slot": "20-24",
+      "trip_count": 620191,
+      "total_revenue": 17774666.559999555,
+      "avg_distance": 5.559848366067882,
+      "avg_speed": 14.711506160635512
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 4,
+      "time_slot": "00-04",
+      "trip_count": 226974,
+      "total_revenue": 5553380.899999996,
+      "avg_distance": 5.660049847119046,
+      "avg_speed": 17.26218773878654
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 4,
+      "time_slot": "04-08",
+      "trip_count": 347112,
+      "total_revenue": 9815805.629999872,
+      "avg_distance": 6.124349273433419,
+      "avg_speed": 17.08794692152035
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 4,
+      "time_slot": "08-12",
+      "trip_count": 661642,
+      "total_revenue": 17726265.399999976,
+      "avg_distance": 4.673186606956666,
+      "avg_speed": 12.172268948906623
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 4,
+      "time_slot": "12-16",
+      "trip_count": 629515,
+      "total_revenue": 19022662.32999993,
+      "avg_distance": 4.853453865277245,
+      "avg_speed": 11.000258816149232
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 4,
+      "time_slot": "16-20",
+      "trip_count": 732159,
+      "total_revenue": 20534560.78999972,
+      "avg_distance": 4.4617702275052755,
+      "avg_speed": 10.776931018521504
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 4,
+      "time_slot": "20-24",
+      "trip_count": 658338,
+      "total_revenue": 18068613.839999594,
+      "avg_distance": 5.45972597510704,
+      "avg_speed": 14.32902157627413
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 5,
+      "time_slot": "00-04",
+      "trip_count": 242671,
+      "total_revenue": 6036993.130000016,
+      "avg_distance": 5.67565622179827,
+      "avg_speed": 16.922368000341258
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 5,
+      "time_slot": "04-08",
+      "trip_count": 258510,
+      "total_revenue": 7361365.209999898,
+      "avg_distance": 6.417182035511198,
+      "avg_speed": 18.285421914663086
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 5,
+      "time_slot": "08-12",
+      "trip_count": 457960,
+      "total_revenue": 11753397.299999816,
+      "avg_distance": 5.019216966547258,
+      "avg_speed": 13.558873840027744
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 5,
+      "time_slot": "12-16",
+      "trip_count": 492429,
+      "total_revenue": 13839927.009999884,
+      "avg_distance": 4.992748093633851,
+      "avg_speed": 12.153543412505696
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 5,
+      "time_slot": "16-20",
+      "trip_count": 611887,
+      "total_revenue": 15181341.769999927,
+      "avg_distance": 4.561793300070109,
+      "avg_speed": 12.085108842369982
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 5,
+      "time_slot": "20-24",
+      "trip_count": 618205,
+      "total_revenue": 15664283.159999762,
+      "avg_distance": 4.989311763897065,
+      "avg_speed": 13.6125469145283
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 6,
+      "time_slot": "00-04",
+      "trip_count": 420881,
+      "total_revenue": 10818911.799999963,
+      "avg_distance": 5.311780220537414,
+      "avg_speed": 15.64367407176532
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 6,
+      "time_slot": "04-08",
+      "trip_count": 225050,
+      "total_revenue": 6131028.969999915,
+      "avg_distance": 6.533727936014215,
+      "avg_speed": 19.51939593507645
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 6,
+      "time_slot": "08-12",
+      "trip_count": 409208,
+      "total_revenue": 9913988.079999814,
+      "avg_distance": 5.205847537193766,
+      "avg_speed": 14.819798865991872
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 6,
+      "time_slot": "12-16",
+      "trip_count": 531879,
+      "total_revenue": 13457276.94999991,
+      "avg_distance": 4.924641074379737,
+      "avg_speed": 12.765815288712737
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 6,
+      "time_slot": "16-20",
+      "trip_count": 621973,
+      "total_revenue": 15269052.35999993,
+      "avg_distance": 4.823228222125363,
+      "avg_speed": 12.676559069976918
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 6,
+      "time_slot": "20-24",
+      "trip_count": 637540,
+      "total_revenue": 15694806.029999642,
+      "avg_distance": 5.012246844119655,
+      "avg_speed": 13.69781626925721
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 7,
+      "time_slot": "00-04",
+      "trip_count": 434785,
+      "total_revenue": 11105645.289999995,
+      "avg_distance": 5.3905673125798,
+      "avg_speed": 15.982921817912507
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 7,
+      "time_slot": "04-08",
+      "trip_count": 217392,
+      "total_revenue": 6209141.819999964,
+      "avg_distance": 6.792173649444305,
+      "avg_speed": 20.306777375487407
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 7,
+      "time_slot": "08-12",
+      "trip_count": 382338,
+      "total_revenue": 9234798.559999963,
+      "avg_distance": 5.456072412368132,
+      "avg_speed": 16.412917671045754
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 7,
+      "time_slot": "12-16",
+      "trip_count": 502678,
+      "total_revenue": 13373360.429999933,
+      "avg_distance": 5.224603913439624,
+      "avg_speed": 13.515655704274934
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 7,
+      "time_slot": "16-20",
+      "trip_count": 512266,
+      "total_revenue": 12811459.389999978,
+      "avg_distance": 5.162196066106303,
+      "avg_speed": 13.607823401172904
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 7,
+      "time_slot": "20-24",
+      "trip_count": 453424,
+      "total_revenue": 11127381.189999964,
+      "avg_distance": 5.4713558964677835,
+      "avg_speed": 15.166464425929783
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 1,
+      "time_slot": "00-04",
+      "trip_count": 18688,
+      "total_revenue": 549639.2699999999,
+      "avg_distance": 6.887996575342457,
+      "avg_speed": 21.602816801509753
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 1,
+      "time_slot": "04-08",
+      "trip_count": 30046,
+      "total_revenue": 676562.790000001,
+      "avg_distance": 4.83066697730147,
+      "avg_speed": 15.64615796373769
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 1,
+      "time_slot": "08-12",
+      "trip_count": 81759,
+      "total_revenue": 1627702.7099999986,
+      "avg_distance": 3.4894104624567257,
+      "avg_speed": 10.562796088787138
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 1,
+      "time_slot": "12-16",
+      "trip_count": 95865,
+      "total_revenue": 1984333.4200000027,
+      "avg_distance": 3.610930892400771,
+      "avg_speed": 10.062709357281634
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 1,
+      "time_slot": "16-20",
+      "trip_count": 108853,
+      "total_revenue": 2132031.54,
+      "avg_distance": 3.322436037591965,
+      "avg_speed": 10.30101097353922
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 1,
+      "time_slot": "20-24",
+      "trip_count": 85499,
+      "total_revenue": 1821806.7200000007,
+      "avg_distance": 4.078755774921347,
+      "avg_speed": 13.627179864867376
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 2,
+      "time_slot": "00-04",
+      "trip_count": 19266,
+      "total_revenue": 553804.1500000006,
+      "avg_distance": 6.697798193709131,
+      "avg_speed": 20.55630831019657
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 2,
+      "time_slot": "04-08",
+      "trip_count": 37073,
+      "total_revenue": 773226.4299999998,
+      "avg_distance": 4.363977557791389,
+      "avg_speed": 14.688678834586572
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 2,
+      "time_slot": "08-12",
+      "trip_count": 114996,
+      "total_revenue": 2287819.050000008,
+      "avg_distance": 3.122395039827471,
+      "avg_speed": 9.142286863549568
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 2,
+      "time_slot": "12-16",
+      "trip_count": 134055,
+      "total_revenue": 2721896.7599999965,
+      "avg_distance": 3.2317396590951484,
+      "avg_speed": 8.86056925934231
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 2,
+      "time_slot": "16-20",
+      "trip_count": 154688,
+      "total_revenue": 2865347.4100000034,
+      "avg_distance": 2.9344984743483344,
+      "avg_speed": 9.36164459339129
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 2,
+      "time_slot": "20-24",
+      "trip_count": 131049,
+      "total_revenue": 2538902.300000001,
+      "avg_distance": 3.5607735274591956,
+      "avg_speed": 12.674554843194336
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 3,
+      "time_slot": "00-04",
+      "trip_count": 22258,
+      "total_revenue": 563875.3500000001,
+      "avg_distance": 5.7112606703207796,
+      "avg_speed": 18.404933921534543
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 3,
+      "time_slot": "04-08",
+      "trip_count": 38408,
+      "total_revenue": 783020.4599999995,
+      "avg_distance": 4.195470214538637,
+      "avg_speed": 14.412060878152545
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 3,
+      "time_slot": "08-12",
+      "trip_count": 116501,
+      "total_revenue": 2276615.269999997,
+      "avg_distance": 3.051366855220117,
+      "avg_speed": 9.188188582723441
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 3,
+      "time_slot": "12-16",
+      "trip_count": 133278,
+      "total_revenue": 2728328.5400000075,
+      "avg_distance": 3.217041297138313,
+      "avg_speed": 8.713166942387417
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 3,
+      "time_slot": "16-20",
+      "trip_count": 149927,
+      "total_revenue": 2858308.640000014,
+      "avg_distance": 2.9562234954344055,
+      "avg_speed": 9.058347099160846
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 3,
+      "time_slot": "20-24",
+      "trip_count": 137220,
+      "total_revenue": 2644104.2900000047,
+      "avg_distance": 3.5462807170966335,
+      "avg_speed": 12.366430351519679
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 4,
+      "time_slot": "00-04",
+      "trip_count": 27897,
+      "total_revenue": 606912.6600000003,
+      "avg_distance": 4.710382478402698,
+      "avg_speed": 16.60106945781695
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 4,
+      "time_slot": "04-08",
+      "trip_count": 37618,
+      "total_revenue": 795109.3999999987,
+      "avg_distance": 4.447510500292406,
+      "avg_speed": 14.919346472198072
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 4,
+      "time_slot": "08-12",
+      "trip_count": 112049,
+      "total_revenue": 2218642.6399999973,
+      "avg_distance": 3.1568815428964316,
+      "avg_speed": 9.317399646034154
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 4,
+      "time_slot": "12-16",
+      "trip_count": 139298,
+      "total_revenue": 2960823.6599999852,
+      "avg_distance": 3.2724794325833737,
+      "avg_speed": 8.52619486630572
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 4,
+      "time_slot": "16-20",
+      "trip_count": 138394,
+      "total_revenue": 2837102.540000017,
+      "avg_distance": 3.1341562495484143,
+      "avg_speed": 8.925474866776803
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 4,
+      "time_slot": "20-24",
+      "trip_count": 130866,
+      "total_revenue": 2623803.7999999975,
+      "avg_distance": 3.7094181070713503,
+      "avg_speed": 12.347705428552798
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 5,
+      "time_slot": "00-04",
+      "trip_count": 34885,
+      "total_revenue": 731886.0599999996,
+      "avg_distance": 4.440677368496493,
+      "avg_speed": 15.914674695788953
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 5,
+      "time_slot": "04-08",
+      "trip_count": 25201,
+      "total_revenue": 564712.7000000017,
+      "avg_distance": 4.887970715447808,
+      "avg_speed": 16.570983600375015
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 5,
+      "time_slot": "08-12",
+      "trip_count": 66619,
+      "total_revenue": 1293927.5799999982,
+      "avg_distance": 3.478596046173009,
+      "avg_speed": 11.257431192332378
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 5,
+      "time_slot": "12-16",
+      "trip_count": 96940,
+      "total_revenue": 2002103.2499999935,
+      "avg_distance": 3.5065664328450628,
+      "avg_speed": 10.253381185431271
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 5,
+      "time_slot": "16-20",
+      "trip_count": 99172,
+      "total_revenue": 1956165.2900000003,
+      "avg_distance": 3.3141724478683434,
+      "avg_speed": 10.29538141507462
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 5,
+      "time_slot": "20-24",
+      "trip_count": 101023,
+      "total_revenue": 2069263.0300000086,
+      "avg_distance": 3.7668119141185556,
+      "avg_speed": 12.029835190483398
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 6,
+      "time_slot": "00-04",
+      "trip_count": 70079,
+      "total_revenue": 1394517.9300000025,
+      "avg_distance": 3.7842076799040973,
+      "avg_speed": 13.775567777633396
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 6,
+      "time_slot": "04-08",
+      "trip_count": 21009,
+      "total_revenue": 495214.3100000004,
+      "avg_distance": 5.20442715026893,
+      "avg_speed": 18.80063218972917
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 6,
+      "time_slot": "08-12",
+      "trip_count": 57870,
+      "total_revenue": 1109019.009999998,
+      "avg_distance": 3.6930632452047663,
+      "avg_speed": 13.311268285513606
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 6,
+      "time_slot": "12-16",
+      "trip_count": 96180,
+      "total_revenue": 1956766.2399999984,
+      "avg_distance": 3.6205413807444318,
+      "avg_speed": 11.361751065398902
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 6,
+      "time_slot": "16-20",
+      "trip_count": 111489,
+      "total_revenue": 2293114.9700000035,
+      "avg_distance": 3.5615985433540502,
+      "avg_speed": 10.893125838241412
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 6,
+      "time_slot": "20-24",
+      "trip_count": 102696,
+      "total_revenue": 2127790.7699999968,
+      "avg_distance": 3.803945820674593,
+      "avg_speed": 12.012732519689399
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 7,
+      "time_slot": "00-04",
+      "trip_count": 72454,
+      "total_revenue": 1444429.6300000022,
+      "avg_distance": 3.801181715295229,
+      "avg_speed": 13.946208087444466
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 7,
+      "time_slot": "04-08",
+      "trip_count": 22128,
+      "total_revenue": 544305.7700000008,
+      "avg_distance": 5.444506507592193,
+      "avg_speed": 19.666710514902686
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 7,
+      "time_slot": "08-12",
+      "trip_count": 55125,
+      "total_revenue": 1093157.6599999983,
+      "avg_distance": 4.007097324263038,
+      "avg_speed": 14.931763477753107
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 7,
+      "time_slot": "12-16",
+      "trip_count": 96269,
+      "total_revenue": 2044140.3999999994,
+      "avg_distance": 3.9558814363917674,
+      "avg_speed": 12.10771311831691
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 7,
+      "time_slot": "16-20",
+      "trip_count": 95680,
+      "total_revenue": 2038160.3900000062,
+      "avg_distance": 4.034848871237439,
+      "avg_speed": 12.180483710023097
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 7,
+      "time_slot": "20-24",
+      "trip_count": 73471,
+      "total_revenue": 1728273.460000005,
+      "avg_distance": 4.940520749683551,
+      "avg_speed": 15.156490370679267
+    }
+  ],
+  "sql": [
+    {
+      "vehicle_type": "green",
+      "weekday": 1,
+      "time_slot": "00-04",
+      "trip_count": 162,
+      "total_revenue": 3808.1400000000012,
+      "avg_distance": 4.181172839506172,
+      "avg_speed": 17.312125974745012
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 1,
+      "time_slot": "04-08",
+      "trip_count": 520,
+      "total_revenue": 8239.999999999973,
+      "avg_distance": 4.1454615384615385,
+      "avg_speed": 14.748977189092434
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 1,
+      "time_slot": "08-12",
+      "trip_count": 1514,
+      "total_revenue": 25657.780000000224,
+      "avg_distance": 3.3897027741083274,
+      "avg_speed": 11.06980677650774
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 1,
+      "time_slot": "12-16",
+      "trip_count": 1512,
+      "total_revenue": 24393.15000000019,
+      "avg_distance": 3.269411375661372,
+      "avg_speed": 10.759832782532396
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 1,
+      "time_slot": "16-20",
+      "trip_count": 1842,
+      "total_revenue": 27938.050000000116,
+      "avg_distance": 2.747122692725297,
+      "avg_speed": 10.987495486666312
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 1,
+      "time_slot": "20-24",
+      "trip_count": 778,
+      "total_revenue": 16497.540000000005,
+      "avg_distance": 3.625231362467867,
+      "avg_speed": 14.077862089719154
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 2,
+      "time_slot": "00-04",
+      "trip_count": 159,
+      "total_revenue": 3099.7800000000007,
+      "avg_distance": 4.129433962264148,
+      "avg_speed": 17.289447664811807
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 2,
+      "time_slot": "04-08",
+      "trip_count": 600,
+      "total_revenue": 9895.54999999996,
+      "avg_distance": 4.38928333333333,
+      "avg_speed": 14.108736674799188
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 2,
+      "time_slot": "08-12",
+      "trip_count": 2051,
+      "total_revenue": 36563.25000000024,
+      "avg_distance": 3.4468600682593795,
+      "avg_speed": 10.944695094052955
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 2,
+      "time_slot": "12-16",
+      "trip_count": 1913,
+      "total_revenue": 31673.67000000025,
+      "avg_distance": 3.3132253005750125,
+      "avg_speed": 10.438353227205651
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 2,
+      "time_slot": "16-20",
+      "trip_count": 2243,
+      "total_revenue": 34644.18000000006,
+      "avg_distance": 2.660151582701739,
+      "avg_speed": 10.776558436972985
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 2,
+      "time_slot": "20-24",
+      "trip_count": 1065,
+      "total_revenue": 22934.910000000014,
+      "avg_distance": 3.683183098591546,
+      "avg_speed": 14.050961670710796
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 3,
+      "time_slot": "00-04",
+      "trip_count": 180,
+      "total_revenue": 3262.7000000000003,
+      "avg_distance": 3.7836666666666665,
+      "avg_speed": 15.799769804170177
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 3,
+      "time_slot": "04-08",
+      "trip_count": 540,
+      "total_revenue": 8988.839999999978,
+      "avg_distance": 4.354833333333329,
+      "avg_speed": 14.595673279392043
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 3,
+      "time_slot": "08-12",
+      "trip_count": 1893,
+      "total_revenue": 30809.930000000215,
+      "avg_distance": 3.083417855256211,
+      "avg_speed": 10.871183120802247
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 3,
+      "time_slot": "12-16",
+      "trip_count": 1922,
+      "total_revenue": 32026.53000000024,
+      "avg_distance": 3.273387096774194,
+      "avg_speed": 10.401014193400865
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 3,
+      "time_slot": "16-20",
+      "trip_count": 2339,
+      "total_revenue": 37536.430000000095,
+      "avg_distance": 2.860709705002137,
+      "avg_speed": 10.939316657666636
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 3,
+      "time_slot": "20-24",
+      "trip_count": 1121,
+      "total_revenue": 25191.43000000003,
+      "avg_distance": 3.732167707404101,
+      "avg_speed": 13.600508804324875
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 4,
+      "time_slot": "00-04",
+      "trip_count": 211,
+      "total_revenue": 3844.8200000000006,
+      "avg_distance": 3.7981990521327025,
+      "avg_speed": 15.711508076125515
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 4,
+      "time_slot": "04-08",
+      "trip_count": 518,
+      "total_revenue": 7532.299999999972,
+      "avg_distance": 4.33353281853282,
+      "avg_speed": 14.662460036995197
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 4,
+      "time_slot": "08-12",
+      "trip_count": 1871,
+      "total_revenue": 30257.990000000296,
+      "avg_distance": 3.1352592196686286,
+      "avg_speed": 10.692526847252875
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 4,
+      "time_slot": "12-16",
+      "trip_count": 2121,
+      "total_revenue": 36648.18000000024,
+      "avg_distance": 3.311277699198493,
+      "avg_speed": 10.192977872271094
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 4,
+      "time_slot": "16-20",
+      "trip_count": 2359,
+      "total_revenue": 39889.96000000001,
+      "avg_distance": 2.8927002967359114,
+      "avg_speed": 10.221413902806368
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 4,
+      "time_slot": "20-24",
+      "trip_count": 1043,
+      "total_revenue": 20719.16000000003,
+      "avg_distance": 3.4210354745925264,
+      "avg_speed": 13.075521137703307
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 5,
+      "time_slot": "00-04",
+      "trip_count": 199,
+      "total_revenue": 4112.48,
+      "avg_distance": 3.8944221105527634,
+      "avg_speed": 16.06087263549293
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 5,
+      "time_slot": "04-08",
+      "trip_count": 346,
+      "total_revenue": 5646.589999999982,
+      "avg_distance": 4.4924566473988445,
+      "avg_speed": 15.924341509943666
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 5,
+      "time_slot": "08-12",
+      "trip_count": 1068,
+      "total_revenue": 17025.920000000016,
+      "avg_distance": 3.4582303370786462,
+      "avg_speed": 12.248047549366403
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 5,
+      "time_slot": "12-16",
+      "trip_count": 1273,
+      "total_revenue": 21232.860000000157,
+      "avg_distance": 3.3140926944226226,
+      "avg_speed": 11.573208026240877
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 5,
+      "time_slot": "16-20",
+      "trip_count": 1609,
+      "total_revenue": 26923.950000000073,
+      "avg_distance": 3.00177750155376,
+      "avg_speed": 10.903401262869824
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 5,
+      "time_slot": "20-24",
+      "trip_count": 998,
+      "total_revenue": 24314.41000000005,
+      "avg_distance": 3.955761523046097,
+      "avg_speed": 13.134733556550726
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 6,
+      "time_slot": "00-04",
+      "trip_count": 478,
+      "total_revenue": 13458.959999999992,
+      "avg_distance": 4.292384937238497,
+      "avg_speed": 15.659495646299483
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 6,
+      "time_slot": "04-08",
+      "trip_count": 243,
+      "total_revenue": 7074.649999999992,
+      "avg_distance": 4.739876543209877,
+      "avg_speed": 18.840782860856315
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 6,
+      "time_slot": "08-12",
+      "trip_count": 707,
+      "total_revenue": 11844.289999999979,
+      "avg_distance": 3.982503536067892,
+      "avg_speed": 14.04931513398897
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 6,
+      "time_slot": "12-16",
+      "trip_count": 1168,
+      "total_revenue": 20959.360000000095,
+      "avg_distance": 3.5339554794520525,
+      "avg_speed": 11.651719475290568
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 6,
+      "time_slot": "16-20",
+      "trip_count": 1410,
+      "total_revenue": 26286.30000000003,
+      "avg_distance": 3.4696808510638304,
+      "avg_speed": 11.641532507416056
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 6,
+      "time_slot": "20-24",
+      "trip_count": 1015,
+      "total_revenue": 22765.700000000048,
+      "avg_distance": 3.8835073891625638,
+      "avg_speed": 13.176834591829934
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 7,
+      "time_slot": "00-04",
+      "trip_count": 461,
+      "total_revenue": 12471.959999999994,
+      "avg_distance": 4.22110629067245,
+      "avg_speed": 15.044679415057354
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 7,
+      "time_slot": "04-08",
+      "trip_count": 235,
+      "total_revenue": 6803.269999999999,
+      "avg_distance": 5.189702127659572,
+      "avg_speed": 18.9115998391949
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 7,
+      "time_slot": "08-12",
+      "trip_count": 738,
+      "total_revenue": 12356.68999999995,
+      "avg_distance": 4.2665040650406505,
+      "avg_speed": 14.767400970257219
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 7,
+      "time_slot": "12-16",
+      "trip_count": 1358,
+      "total_revenue": 23170.38000000011,
+      "avg_distance": 3.35978645066274,
+      "avg_speed": 12.514268491051137
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 7,
+      "time_slot": "16-20",
+      "trip_count": 1512,
+      "total_revenue": 26988.170000000067,
+      "avg_distance": 3.2690079365079416,
+      "avg_speed": 12.49219764865018
+    },
+    {
+      "vehicle_type": "green",
+      "weekday": 7,
+      "time_slot": "20-24",
+      "trip_count": 902,
+      "total_revenue": 18811.65000000001,
+      "avg_distance": 3.645088691796006,
+      "avg_speed": 14.005376287626323
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 1,
+      "time_slot": "00-04",
+      "trip_count": 177170,
+      "total_revenue": 4381018.560000001,
+      "avg_distance": 6.149143319975165,
+      "avg_speed": 18.471748026860777
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 1,
+      "time_slot": "04-08",
+      "trip_count": 265287,
+      "total_revenue": 7731818.139999861,
+      "avg_distance": 6.332537730834923,
+      "avg_speed": 17.586655159000884
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 1,
+      "time_slot": "08-12",
+      "trip_count": 481744,
+      "total_revenue": 12510085.18999988,
+      "avg_distance": 4.8476223948818955,
+      "avg_speed": 12.957176853331164
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 1,
+      "time_slot": "12-16",
+      "trip_count": 433067,
+      "total_revenue": 12019293.379999882,
+      "avg_distance": 5.012627974424308,
+      "avg_speed": 12.30431529835667
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 1,
+      "time_slot": "16-20",
+      "trip_count": 515110,
+      "total_revenue": 13145573.709999934,
+      "avg_distance": 4.42279379355864,
+      "avg_speed": 12.057099917020974
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 1,
+      "time_slot": "20-24",
+      "trip_count": 418459,
+      "total_revenue": 11149472.500000048,
+      "avg_distance": 5.377710731517298,
+      "avg_speed": 15.173804471025376
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 2,
+      "time_slot": "00-04",
+      "trip_count": 175059,
+      "total_revenue": 4469451.789999999,
+      "avg_distance": 6.012527467882265,
+      "avg_speed": 18.175861145429305
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 2,
+      "time_slot": "04-08",
+      "trip_count": 324159,
+      "total_revenue": 8947639.129999945,
+      "avg_distance": 5.940743126058513,
+      "avg_speed": 16.858956074072
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 2,
+      "time_slot": "08-12",
+      "trip_count": 632676,
+      "total_revenue": 16806169.000000197,
+      "avg_distance": 4.568640918890492,
+      "avg_speed": 12.037180868565276
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 2,
+      "time_slot": "12-16",
+      "trip_count": 572833,
+      "total_revenue": 15951264.839999925,
+      "avg_distance": 4.746582894141933,
+      "avg_speed": 11.61713165096846
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 2,
+      "time_slot": "16-20",
+      "trip_count": 697333,
+      "total_revenue": 17893502.840000104,
+      "avg_distance": 4.293943312592374,
+      "avg_speed": 11.431458999884594
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 2,
+      "time_slot": "20-24",
+      "trip_count": 589900,
+      "total_revenue": 16673672.859999714,
+      "avg_distance": 5.437697402949656,
+      "avg_speed": 14.901032266935104
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 3,
+      "time_slot": "00-04",
+      "trip_count": 196162,
+      "total_revenue": 4856510.910000004,
+      "avg_distance": 5.778338602787498,
+      "avg_speed": 17.708583895188223
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 3,
+      "time_slot": "04-08",
+      "trip_count": 336630,
+      "total_revenue": 9235869.209999908,
+      "avg_distance": 5.865380393904335,
+      "avg_speed": 16.6749495846304
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 3,
+      "time_slot": "08-12",
+      "trip_count": 648003,
+      "total_revenue": 17238179.92000016,
+      "avg_distance": 4.546428758817407,
+      "avg_speed": 12.089573178363965
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 3,
+      "time_slot": "12-16",
+      "trip_count": 582388,
+      "total_revenue": 16800383.920000143,
+      "avg_distance": 4.848925539331227,
+      "avg_speed": 11.536965963848738
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 3,
+      "time_slot": "16-20",
+      "trip_count": 696997,
+      "total_revenue": 18665472.420000277,
+      "avg_distance": 4.40481400780779,
+      "avg_speed": 11.259534809041362
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 3,
+      "time_slot": "20-24",
+      "trip_count": 620191,
+      "total_revenue": 17774666.559999555,
+      "avg_distance": 5.559848366067882,
+      "avg_speed": 14.711506160635512
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 4,
+      "time_slot": "00-04",
+      "trip_count": 226974,
+      "total_revenue": 5553380.899999996,
+      "avg_distance": 5.660049847119046,
+      "avg_speed": 17.26218773878654
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 4,
+      "time_slot": "04-08",
+      "trip_count": 347112,
+      "total_revenue": 9815805.629999872,
+      "avg_distance": 6.124349273433419,
+      "avg_speed": 17.08794692152035
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 4,
+      "time_slot": "08-12",
+      "trip_count": 661642,
+      "total_revenue": 17726265.399999976,
+      "avg_distance": 4.673186606956666,
+      "avg_speed": 12.172268948906623
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 4,
+      "time_slot": "12-16",
+      "trip_count": 629515,
+      "total_revenue": 19022662.32999993,
+      "avg_distance": 4.853453865277245,
+      "avg_speed": 11.000258816149232
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 4,
+      "time_slot": "16-20",
+      "trip_count": 732159,
+      "total_revenue": 20534560.78999972,
+      "avg_distance": 4.4617702275052755,
+      "avg_speed": 10.776931018521504
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 4,
+      "time_slot": "20-24",
+      "trip_count": 658338,
+      "total_revenue": 18068613.839999594,
+      "avg_distance": 5.45972597510704,
+      "avg_speed": 14.32902157627413
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 5,
+      "time_slot": "00-04",
+      "trip_count": 242671,
+      "total_revenue": 6036993.130000016,
+      "avg_distance": 5.67565622179827,
+      "avg_speed": 16.922368000341258
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 5,
+      "time_slot": "04-08",
+      "trip_count": 258510,
+      "total_revenue": 7361365.209999898,
+      "avg_distance": 6.417182035511198,
+      "avg_speed": 18.285421914663086
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 5,
+      "time_slot": "08-12",
+      "trip_count": 457960,
+      "total_revenue": 11753397.299999816,
+      "avg_distance": 5.019216966547258,
+      "avg_speed": 13.558873840027744
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 5,
+      "time_slot": "12-16",
+      "trip_count": 492429,
+      "total_revenue": 13839927.009999884,
+      "avg_distance": 4.992748093633851,
+      "avg_speed": 12.153543412505696
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 5,
+      "time_slot": "16-20",
+      "trip_count": 611887,
+      "total_revenue": 15181341.769999927,
+      "avg_distance": 4.561793300070109,
+      "avg_speed": 12.085108842369982
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 5,
+      "time_slot": "20-24",
+      "trip_count": 618205,
+      "total_revenue": 15664283.159999762,
+      "avg_distance": 4.989311763897065,
+      "avg_speed": 13.6125469145283
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 6,
+      "time_slot": "00-04",
+      "trip_count": 420881,
+      "total_revenue": 10818911.799999963,
+      "avg_distance": 5.311780220537414,
+      "avg_speed": 15.64367407176532
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 6,
+      "time_slot": "04-08",
+      "trip_count": 225050,
+      "total_revenue": 6131028.969999915,
+      "avg_distance": 6.533727936014215,
+      "avg_speed": 19.51939593507645
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 6,
+      "time_slot": "08-12",
+      "trip_count": 409208,
+      "total_revenue": 9913988.079999814,
+      "avg_distance": 5.205847537193766,
+      "avg_speed": 14.819798865991872
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 6,
+      "time_slot": "12-16",
+      "trip_count": 531879,
+      "total_revenue": 13457276.94999991,
+      "avg_distance": 4.924641074379737,
+      "avg_speed": 12.765815288712737
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 6,
+      "time_slot": "16-20",
+      "trip_count": 621973,
+      "total_revenue": 15269052.35999993,
+      "avg_distance": 4.823228222125363,
+      "avg_speed": 12.676559069976918
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 6,
+      "time_slot": "20-24",
+      "trip_count": 637540,
+      "total_revenue": 15694806.029999642,
+      "avg_distance": 5.012246844119655,
+      "avg_speed": 13.69781626925721
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 7,
+      "time_slot": "00-04",
+      "trip_count": 434785,
+      "total_revenue": 11105645.289999995,
+      "avg_distance": 5.3905673125798,
+      "avg_speed": 15.982921817912507
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 7,
+      "time_slot": "04-08",
+      "trip_count": 217392,
+      "total_revenue": 6209141.819999964,
+      "avg_distance": 6.792173649444305,
+      "avg_speed": 20.306777375487407
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 7,
+      "time_slot": "08-12",
+      "trip_count": 382338,
+      "total_revenue": 9234798.559999963,
+      "avg_distance": 5.456072412368132,
+      "avg_speed": 16.412917671045754
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 7,
+      "time_slot": "12-16",
+      "trip_count": 502678,
+      "total_revenue": 13373360.429999933,
+      "avg_distance": 5.224603913439624,
+      "avg_speed": 13.515655704274934
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 7,
+      "time_slot": "16-20",
+      "trip_count": 512266,
+      "total_revenue": 12811459.389999978,
+      "avg_distance": 5.162196066106303,
+      "avg_speed": 13.607823401172904
+    },
+    {
+      "vehicle_type": "hvfhv",
+      "weekday": 7,
+      "time_slot": "20-24",
+      "trip_count": 453424,
+      "total_revenue": 11127381.189999964,
+      "avg_distance": 5.4713558964677835,
+      "avg_speed": 15.166464425929783
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 1,
+      "time_slot": "00-04",
+      "trip_count": 18688,
+      "total_revenue": 549639.2699999999,
+      "avg_distance": 6.887996575342457,
+      "avg_speed": 21.602816801509753
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 1,
+      "time_slot": "04-08",
+      "trip_count": 30046,
+      "total_revenue": 676562.790000001,
+      "avg_distance": 4.83066697730147,
+      "avg_speed": 15.64615796373769
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 1,
+      "time_slot": "08-12",
+      "trip_count": 81759,
+      "total_revenue": 1627702.7099999986,
+      "avg_distance": 3.4894104624567257,
+      "avg_speed": 10.562796088787138
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 1,
+      "time_slot": "12-16",
+      "trip_count": 95865,
+      "total_revenue": 1984333.4200000027,
+      "avg_distance": 3.610930892400771,
+      "avg_speed": 10.062709357281634
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 1,
+      "time_slot": "16-20",
+      "trip_count": 108853,
+      "total_revenue": 2132031.54,
+      "avg_distance": 3.322436037591965,
+      "avg_speed": 10.30101097353922
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 1,
+      "time_slot": "20-24",
+      "trip_count": 85499,
+      "total_revenue": 1821806.7200000007,
+      "avg_distance": 4.078755774921347,
+      "avg_speed": 13.627179864867376
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 2,
+      "time_slot": "00-04",
+      "trip_count": 19266,
+      "total_revenue": 553804.1500000006,
+      "avg_distance": 6.697798193709131,
+      "avg_speed": 20.55630831019657
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 2,
+      "time_slot": "04-08",
+      "trip_count": 37073,
+      "total_revenue": 773226.4299999998,
+      "avg_distance": 4.363977557791389,
+      "avg_speed": 14.688678834586572
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 2,
+      "time_slot": "08-12",
+      "trip_count": 114996,
+      "total_revenue": 2287819.050000008,
+      "avg_distance": 3.122395039827471,
+      "avg_speed": 9.142286863549568
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 2,
+      "time_slot": "12-16",
+      "trip_count": 134055,
+      "total_revenue": 2721896.7599999965,
+      "avg_distance": 3.2317396590951484,
+      "avg_speed": 8.86056925934231
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 2,
+      "time_slot": "16-20",
+      "trip_count": 154688,
+      "total_revenue": 2865347.4100000034,
+      "avg_distance": 2.9344984743483344,
+      "avg_speed": 9.36164459339129
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 2,
+      "time_slot": "20-24",
+      "trip_count": 131049,
+      "total_revenue": 2538902.300000001,
+      "avg_distance": 3.5607735274591956,
+      "avg_speed": 12.674554843194336
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 3,
+      "time_slot": "00-04",
+      "trip_count": 22258,
+      "total_revenue": 563875.3500000001,
+      "avg_distance": 5.7112606703207796,
+      "avg_speed": 18.404933921534543
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 3,
+      "time_slot": "04-08",
+      "trip_count": 38408,
+      "total_revenue": 783020.4599999995,
+      "avg_distance": 4.195470214538637,
+      "avg_speed": 14.412060878152545
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 3,
+      "time_slot": "08-12",
+      "trip_count": 116501,
+      "total_revenue": 2276615.269999997,
+      "avg_distance": 3.051366855220117,
+      "avg_speed": 9.188188582723441
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 3,
+      "time_slot": "12-16",
+      "trip_count": 133278,
+      "total_revenue": 2728328.5400000075,
+      "avg_distance": 3.217041297138313,
+      "avg_speed": 8.713166942387417
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 3,
+      "time_slot": "16-20",
+      "trip_count": 149927,
+      "total_revenue": 2858308.640000014,
+      "avg_distance": 2.9562234954344055,
+      "avg_speed": 9.058347099160846
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 3,
+      "time_slot": "20-24",
+      "trip_count": 137220,
+      "total_revenue": 2644104.2900000047,
+      "avg_distance": 3.5462807170966335,
+      "avg_speed": 12.366430351519679
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 4,
+      "time_slot": "00-04",
+      "trip_count": 27897,
+      "total_revenue": 606912.6600000003,
+      "avg_distance": 4.710382478402698,
+      "avg_speed": 16.60106945781695
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 4,
+      "time_slot": "04-08",
+      "trip_count": 37618,
+      "total_revenue": 795109.3999999987,
+      "avg_distance": 4.447510500292406,
+      "avg_speed": 14.919346472198072
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 4,
+      "time_slot": "08-12",
+      "trip_count": 112049,
+      "total_revenue": 2218642.6399999973,
+      "avg_distance": 3.1568815428964316,
+      "avg_speed": 9.317399646034154
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 4,
+      "time_slot": "12-16",
+      "trip_count": 139298,
+      "total_revenue": 2960823.6599999852,
+      "avg_distance": 3.2724794325833737,
+      "avg_speed": 8.52619486630572
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 4,
+      "time_slot": "16-20",
+      "trip_count": 138394,
+      "total_revenue": 2837102.540000017,
+      "avg_distance": 3.1341562495484143,
+      "avg_speed": 8.925474866776803
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 4,
+      "time_slot": "20-24",
+      "trip_count": 130866,
+      "total_revenue": 2623803.7999999975,
+      "avg_distance": 3.7094181070713503,
+      "avg_speed": 12.347705428552798
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 5,
+      "time_slot": "00-04",
+      "trip_count": 34885,
+      "total_revenue": 731886.0599999996,
+      "avg_distance": 4.440677368496493,
+      "avg_speed": 15.914674695788953
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 5,
+      "time_slot": "04-08",
+      "trip_count": 25201,
+      "total_revenue": 564712.7000000017,
+      "avg_distance": 4.887970715447808,
+      "avg_speed": 16.570983600375015
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 5,
+      "time_slot": "08-12",
+      "trip_count": 66619,
+      "total_revenue": 1293927.5799999982,
+      "avg_distance": 3.478596046173009,
+      "avg_speed": 11.257431192332378
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 5,
+      "time_slot": "12-16",
+      "trip_count": 96940,
+      "total_revenue": 2002103.2499999935,
+      "avg_distance": 3.5065664328450628,
+      "avg_speed": 10.253381185431271
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 5,
+      "time_slot": "16-20",
+      "trip_count": 99172,
+      "total_revenue": 1956165.2900000003,
+      "avg_distance": 3.3141724478683434,
+      "avg_speed": 10.29538141507462
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 5,
+      "time_slot": "20-24",
+      "trip_count": 101023,
+      "total_revenue": 2069263.0300000086,
+      "avg_distance": 3.7668119141185556,
+      "avg_speed": 12.029835190483398
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 6,
+      "time_slot": "00-04",
+      "trip_count": 70079,
+      "total_revenue": 1394517.9300000025,
+      "avg_distance": 3.7842076799040973,
+      "avg_speed": 13.775567777633396
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 6,
+      "time_slot": "04-08",
+      "trip_count": 21009,
+      "total_revenue": 495214.3100000004,
+      "avg_distance": 5.20442715026893,
+      "avg_speed": 18.80063218972917
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 6,
+      "time_slot": "08-12",
+      "trip_count": 57870,
+      "total_revenue": 1109019.009999998,
+      "avg_distance": 3.6930632452047663,
+      "avg_speed": 13.311268285513606
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 6,
+      "time_slot": "12-16",
+      "trip_count": 96180,
+      "total_revenue": 1956766.2399999984,
+      "avg_distance": 3.6205413807444318,
+      "avg_speed": 11.361751065398902
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 6,
+      "time_slot": "16-20",
+      "trip_count": 111489,
+      "total_revenue": 2293114.9700000035,
+      "avg_distance": 3.5615985433540502,
+      "avg_speed": 10.893125838241412
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 6,
+      "time_slot": "20-24",
+      "trip_count": 102696,
+      "total_revenue": 2127790.7699999968,
+      "avg_distance": 3.803945820674593,
+      "avg_speed": 12.012732519689399
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 7,
+      "time_slot": "00-04",
+      "trip_count": 72454,
+      "total_revenue": 1444429.6300000022,
+      "avg_distance": 3.801181715295229,
+      "avg_speed": 13.946208087444466
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 7,
+      "time_slot": "04-08",
+      "trip_count": 22128,
+      "total_revenue": 544305.7700000008,
+      "avg_distance": 5.444506507592193,
+      "avg_speed": 19.666710514902686
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 7,
+      "time_slot": "08-12",
+      "trip_count": 55125,
+      "total_revenue": 1093157.6599999983,
+      "avg_distance": 4.007097324263038,
+      "avg_speed": 14.931763477753107
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 7,
+      "time_slot": "12-16",
+      "trip_count": 96269,
+      "total_revenue": 2044140.3999999994,
+      "avg_distance": 3.9558814363917674,
+      "avg_speed": 12.10771311831691
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 7,
+      "time_slot": "16-20",
+      "trip_count": 95680,
+      "total_revenue": 2038160.3900000062,
+      "avg_distance": 4.034848871237439,
+      "avg_speed": 12.180483710023097
+    },
+    {
+      "vehicle_type": "yellow",
+      "weekday": 7,
+      "time_slot": "20-24",
+      "trip_count": 73471,
+      "total_revenue": 1728273.460000005,
+      "avg_distance": 4.940520749683551,
+      "avg_speed": 15.156490370679267
+    }
+  ]
+}

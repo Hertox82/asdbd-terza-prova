@@ -1,0 +1,14 @@
+{
+  "yellow_tripdata_2025-07.parquet": {
+    "size_bytes": 66943728,
+    "sha256": "1efa6a0458dc60341f7f81dcbb5015af731f42d1a109f4e0d594dd46970fd4ef"
+  },
+  "green_tripdata_2025-07.parquet": {
+    "size_bytes": 1188380,
+    "sha256": "bbd6f9e5955570521df5c6dd40c1a75b37cccd730fcaff4fb50bcd32d2d35f69"
+  },
+  "fhvhv_tripdata_2025-07.parquet": {
+    "size_bytes": 487222980,
+    "sha256": "cae4e3d120f9af1a7369dad915dfe9beadda914b08a38ee8c045a4d09f085712"
+  }
+}
